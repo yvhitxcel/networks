@@ -1,0 +1,14 @@
+$date&time diff$ = $EndDate$ - $StartDate$
+$StartDate(DayNum)$  为 $StartDate$ 日期的周几数    周日为1  周一为2  ...周六为7
+$EndDate(DayNum)$  为 $EndDate$的周几
+
+Temp_WorkDays = 1+($date&time diff$*5-($StartDate(DayNum)$-$EndDate(DayNum)$)*2)/7
+
+Correction = {
+($StartDate(DayName)$ = "Sun")  AND ($EndDate(DayName)$ = "Sat") => -2
+($StartDate(DayName)$ = "Sun")  OR ($EndDate(DayName)$ = "Sat") => -1
+TRUE => 0
+}
+
+Network_Days = Temp_WorkDays + Correction
+
